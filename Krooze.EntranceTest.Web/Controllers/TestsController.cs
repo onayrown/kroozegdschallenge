@@ -19,7 +19,7 @@ namespace Krooze.EntranceTest.Web.Controllers
             _testsService = testsService;
         }
         
-        [HttpGet("GetAllMovies")]
+        [HttpGet("Movies")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(Result), 400)]
         public IActionResult GetAllMovies()
@@ -35,7 +35,7 @@ namespace Krooze.EntranceTest.Web.Controllers
             }
         }
 
-        [HttpGet("GetDirector")]
+        [HttpGet("Director")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(Result), 400)]
         public IActionResult GetDirector()
@@ -67,7 +67,7 @@ namespace Krooze.EntranceTest.Web.Controllers
             }
         }
 
-        [HttpGet("GetOtherTaxes")]
+        [HttpGet("OtherTaxes")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(Result), 400)]
         public IActionResult GetOtherTaxes()
@@ -87,7 +87,7 @@ namespace Krooze.EntranceTest.Web.Controllers
             }
         }
 
-        [HttpGet("IsThereDiscount")]
+        [HttpGet("Discount")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(Result), 400)]
         public IActionResult IsThereDiscount()
@@ -107,7 +107,7 @@ namespace Krooze.EntranceTest.Web.Controllers
             }
         }
 
-        [HttpGet("GetInstallments/{fullPrice}")]
+        [HttpGet("Installments/{fullPrice}")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(Result), 400)]
         public IActionResult GetInstallments(decimal fullPrice)
@@ -123,7 +123,7 @@ namespace Krooze.EntranceTest.Web.Controllers
             }
         }
 
-        [HttpPost("GetCruises")]
+        [HttpPost("Cruises")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(Result), 400)]
         public IActionResult GetCruises([FromBody] CruiseRequestDTO cruiseRequest)

@@ -32,7 +32,7 @@ namespace Krooze.EntranceTest.Web
             services.AddTransient<ITestsService, TestsService>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v2", new OpenApiInfo { Title = "Krooze.EntranceTest - Felipe Machado", Version = "v2" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Krooze.EntranceTest - Felipe Machado", Version = "v1" });
             });
         }
 
