@@ -32,7 +32,7 @@ namespace Krooze.EntranceTest.Web
             services.AddTransient<ITestsService, TestsService>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Krooze.EntranceTest - Felipe Machado", Version = "v1" });
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "Krooze.EntranceTest - Felipe Machado", Version = "v2" });
             });
         }
 
@@ -54,7 +54,7 @@ namespace Krooze.EntranceTest.Web
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Krooze.EntranceTest - Felipe Machado");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Krooze.EntranceTest - Felipe Machado"); 
             });
         }
     }
