@@ -1,8 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Krooze.EntranceTest.WriteHere.Services;
+using Krooze.EntranceTest.WriteHere.Structure.Interfaces;
+using Krooze.EntranceTest.WriteHere.Tests.InjectionTests;
+using Krooze.EntranceTest.WriteHere.Tests.LogicTests;
+using Krooze.EntranceTest.WriteHere.Tests.WebTests;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace Krooze.EntranceTest.Web
 {
@@ -19,6 +25,15 @@ namespace Krooze.EntranceTest.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddTransient<WebTest, WebTest>();
+            services.AddTransient<XMLTest, XMLTest>();
+            services.AddTransient<SimpleLogicTest, SimpleLogicTest>();
+            services.AddTransient<InjectionTest, InjectionTest>(); 
+            services.AddTransient<ITestsService, TestsService>();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Krooze.EntranceTest - Felipe Machado", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +51,11 @@ namespace Krooze.EntranceTest.Web
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Krooze.EntranceTest - Felipe Machado");
+            });
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
 using System.Xml.Serialization;
+using System.Reflection;
 
 namespace Krooze.EntranceTest.WriteHere.Tests.LogicTests
 {
@@ -15,8 +16,10 @@ namespace Krooze.EntranceTest.WriteHere.Tests.LogicTests
             //TODO: Take the Cruises.xml file, on the Resources folder, and translate it to the CruisesDTO object,
             //you can do it in any way, including intermediary objects
 
-            XElement xmlFile = XElement.Load(@"Resources\Cruises.xml");
-            string xmlString = xmlFile.ToString();
+            var assembly = Assembly.GetExecutingAssembly();
+            string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Cruises.xml"));
+
+            string xmlString = GetResourceFile(resourceName);
             var cruiseDTO = Deserialize<CruiseDTO>(xmlString);
 
             foreach (var item in cruiseDTO.PassengerCruise)
@@ -33,6 +36,21 @@ namespace Krooze.EntranceTest.WriteHere.Tests.LogicTests
             }
 
             return cruiseDTO;
+        }
+
+        public string GetResourceFile(string resourceName)
+        {
+            string result = string.Empty;
+
+            using (Stream stream = this.GetType().Assembly.
+                       GetManifestResourceStream(resourceName))
+            {
+                using (StreamReader sr = new StreamReader(stream))
+                {
+                    result = sr.ReadToEnd();
+                }
+            }
+            return result;
         }
 
         public T Deserialize<T>(string input) where T : class

@@ -48,14 +48,13 @@ namespace Krooze.EntranceTest.WriteHere.Tests.WebTests
                 StreamReader reader = new StreamReader(streamDados);
                 var objResponse = reader.ReadToEnd();
 
-                var jsonReturn = JsonConvert.DeserializeObject<JObject>(objResponse);
-                var count = jsonReturn["count"].Value<int>();
-
+                var list = JsonConvert.DeserializeObject<JObject>(objResponse);
+                var count = list["count"].Value<int>();
                 var directors = new Dictionary<string, int>();
 
                 for (int i = 0; i < count - 1; i++)
                 {
-                    var director = jsonReturn.SelectToken($"results[{i}].director").ToString();
+                    var director = list.SelectToken($"results[{i}].director").ToString();
                     var value = 0;
 
                     if (i == 0)
@@ -87,6 +86,6 @@ namespace Krooze.EntranceTest.WriteHere.Tests.WebTests
             webRequest.UserAgent = "KroozeEntranceTests";
 
             return webRequest;
-        }
+        }        
     }
 }
